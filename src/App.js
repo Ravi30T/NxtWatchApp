@@ -43,6 +43,10 @@ class App extends Component {
     smSideBar: false,
     activeTab: 'Home',
     savedVideos: [],
+    likedVideos: [],
+    disLikedVideos: [],
+    likeButton: false,
+    dislikeButton: false,
   }
 
   onToggleDarkMode = () => {
@@ -110,6 +114,46 @@ class App extends Component {
     }
   }
 
+  onClickLikeButton = details => {
+    const {disLikedVideos} = this.state
+
+    const verifyDislikedVideos = disLikedVideos.filter(
+      each => each.id === details.id,
+    )
+
+    if (verifyDislikedVideos.length === 0) {
+      this.setState(prevState => ({
+        likedVideos: [...prevState.likedVideos, details],
+      }))
+    } else {
+      this.setState(prevState => ({
+        disLikedVideos: [
+          ...prevState.disLikedVideos.filter(each => each.id !== details.id),
+        ],
+        likedVideos: [...prevState.likedVideos, details],
+      }))
+    }
+  }
+
+  onClickDislikeButton = details => {
+    const {likedVideos} = this.state
+
+    const verifyLikedVideos = likedVideos.filter(each => each.id === details.id)
+
+    if (verifyLikedVideos.length === 0) {
+      this.setState(prevState => ({
+        disLikedVideos: [...prevState.disLikedVideos, details],
+      }))
+    } else {
+      this.setState(prevState => ({
+        likedVideos: [
+          ...prevState.likedVideos.filter(each => each.id !== details.id),
+        ],
+        disLikedVideos: [...prevState.disLikedVideos, details],
+      }))
+    }
+  }
+
   render() {
     const {
       darkMode,
@@ -120,6 +164,8 @@ class App extends Component {
       likeButton,
       dislikeButton,
       savedVideos,
+      likedVideos,
+      disLikedVideos,
     } = this.state
 
     return (
@@ -133,6 +179,8 @@ class App extends Component {
           likeButton,
           dislikeButton,
           savedVideos,
+          likedVideos,
+          disLikedVideos,
           toggleDarkMode: this.onToggleDarkMode,
           onClickWebsiteLogo: this.onClickWebsiteLogo,
           toggleAd: this.onToggleAd,

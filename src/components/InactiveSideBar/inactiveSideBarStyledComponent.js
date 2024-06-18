@@ -1,11 +1,21 @@
 import styled from 'styled-components'
 
-export const SideBarContainer = styled.div`
+export const InactiveSideBarContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 18vw;
+  padding-bottom: 10px;
   background-color: ${props => (props.isdarkMode ? '#212121' : '#ffffff')};
+
+  @media (min-width: 768px) {
+    width: 20%;
+    background-color: ${props => (props.isdarkMode ? '#212121' : '#ffffff')};
+    height: 95vh;
+    padding-bottom: 10px;
+    position: fixed;
+    left: 0;
+    margin-top: 55px;
+  }
 
   @media (max-width: 767px) {
     display: ${props => (props.smDevice ? 'flex' : 'none')};

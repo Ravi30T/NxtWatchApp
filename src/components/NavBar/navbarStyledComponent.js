@@ -77,6 +77,10 @@ export const LgNav = styled.nav`
     display: none;
   }
 
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -126,6 +130,10 @@ export const LgLogoutButton = styled.button`
   padding: 10px;
   font-family: 'Roboto';
   cursor: pointer;
+
+  @media ((min-width: 768px) and (max-width: 991px)) {
+    margin-right: 10px;
+  }
 `
 
 export const PopupContainer = styled.div`

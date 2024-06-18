@@ -31,6 +31,8 @@ const NxtWatchContext = React.createContext({
   onClickGaming: () => {},
   onClickSavedVideos: () => {},
   savedVideos: [],
+  likedVideos: [],
+  disLikedVideos: [],
   onAddSavedVideos: () => {},
   toggleSaveButton: () => {},
   likeButton: false,

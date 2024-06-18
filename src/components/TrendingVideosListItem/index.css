@@ -8,7 +8,9 @@
 
 .xs-video-details-container {
   display: flex;
-  padding: 5px;
+  padding: 0px;
+  margin-left: 5px;
+  margin-top: 0px;
 }
 
 .xs-main-video-details-container {

@@ -8,7 +8,7 @@ import ReactPlayer from 'react-player'
 import {AiOutlineLike, AiOutlineDislike} from 'react-icons/ai'
 import {MdPlaylistAdd, MdPlaylistAddCheck} from 'react-icons/md'
 
-// import {formatDistanceToNow} from 'date-fns'
+import {formatDistanceToNow} from 'date-fns'
 
 import NavBar from '../NavBar'
 import InactiveSideBar from '../InactiveSideBar'
@@ -46,29 +46,10 @@ class VideoItemDetails extends Component {
   state = {
     videoData: [],
     videoDetailsApiStatus: videoDetailsApiStatusConstants.initial,
-    likeButton: false,
-    dislikeButton: false,
   }
 
   componentDidMount() {
     this.getVideoData()
-  }
-
-  onClickLikeButton = () => {
-    // this.setState(prevState => ({likeButton: !prevState.likeButton}))
-
-    this.setState(prevState => ({
-      likeButton: !prevState.likeButton,
-      dislikeButton: prevState.likeButton ? prevState.dislikeButton : false,
-    }))
-  }
-
-  onClickDislikeButton = () => {
-    // this.setState(prevState => ({dislikeButton: !prevState.dislikeButton}))
-    this.setState(prevState => ({
-      dislikeButton: !prevState.dislikeButton,
-      likeButton: prevState.dislikeButton ? prevState.likeButton : false,
-    }))
   }
 
   onClickVideoDetailsRetry = () => {
@@ -107,7 +88,9 @@ class VideoItemDetails extends Component {
         profileImg: data.video_details.channel.profile_image_url,
         subscribersCount: data.video_details.channel.subscriber_count,
         description: data.video_details.description,
-        publishedAt: data.video_details.published_at,
+        publishedAt: formatDistanceToNow(
+          new Date(data.video_details.published_at),
+        ).slice(-8),
         thumbnailUrl: data.video_details.thumbnail_url,
         videoUrl: data.video_details.video_url,
         viewsCount: data.video_details.view_count,
@@ -125,7 +108,7 @@ class VideoItemDetails extends Component {
   }
 
   render() {
-    const {videoData, likeButton, dislikeButton} = this.state
+    const {videoData} = this.state
 
     const {
       id,
@@ -142,7 +125,16 @@ class VideoItemDetails extends Component {
     return (
       <NxtWatchContext.Consumer>
         {value => {
-          const {darkMode, smSideBar, savedVideos, onAddSavedVideos} = value
+          const {
+            darkMode,
+            smSideBar,
+            savedVideos,
+            onAddSavedVideos,
+            toggleLikeButton,
+            toggleDislikeButton,
+            likedVideos,
+            disLikedVideos,
+          } = value
 
           const findVideoSaved =
             savedVideos.filter(each => each.id === id).length === 1
@@ -155,8 +147,39 @@ class VideoItemDetails extends Component {
             videoSaved = false
           }
 
+          const findVideoLiked =
+            likedVideos.filter(each => each.id === id).length === 1
+
+          let likeButton
+
+          if (findVideoLiked) {
+            likeButton = true
+          } else {
+            likeButton = false
+          }
+
+          const findVideoDisliked =
+            disLikedVideos.filter(each => each.id === id).length === 1
+
+          let dislikeButton
+
+          if (findVideoDisliked) {
+            dislikeButton = true
+          } else {
+            dislikeButton = false
+          }
+
           const onClickSave = () => {
             onAddSavedVideos(videoData)
+          }
+
+          const onClickLikeButton = () => {
+            console.log('like clicked')
+            toggleLikeButton(videoData)
+          }
+
+          const onClickDislikeButton = () => {
+            toggleDislikeButton(videoData)
           }
 
           const renderVideoDetailsInProgress = () => (
@@ -186,24 +209,29 @@ class VideoItemDetails extends Component {
                       {viewsCount} views{' '}
                     </ViewsCount>
                     <PublishedDate isDarkMode={darkMode}>
-                      {publishedAt}
+                      {publishedAt} ago
                     </PublishedDate>
                   </div>
 
                   <div className="like-dislike-saved-container">
                     <LikeButton
-                      onClick={this.onClickLikeButton}
+                      onClick={onClickLikeButton}
                       isDarkMode={darkMode}
                       isActive={likeButton}
                     >
-                      <AiOutlineLike /> Like
+                      <AiOutlineLike />{' '}
+                      <span className="like-dislike-save-span-el"> Like </span>
                     </LikeButton>
                     <DislikeButton
-                      onClick={this.onClickDislikeButton}
+                      onClick={onClickDislikeButton}
                       isDarkMode={darkMode}
                       isActive={dislikeButton}
                     >
-                      <AiOutlineDislike /> Dislike
+                      <AiOutlineDislike />{' '}
+                      <span className="like-dislike-save-span-el">
+                        {' '}
+                        Dislike{' '}
+                      </span>
                     </DislikeButton>
                     {videoSaved ? (
                       <SavedButton
@@ -211,11 +239,19 @@ class VideoItemDetails extends Component {
                         isDarkMode={darkMode}
                         isActive={videoSaved}
                       >
-                        <MdPlaylistAddCheck /> Saved
+                        <MdPlaylistAddCheck />{' '}
+                        <span className="like-dislike-save-span-el">
+                          {' '}
+                          Saved{' '}
+                        </span>
                       </SavedButton>
                     ) : (
                       <SaveButton onClick={onClickSave} isDarkMode={darkMode}>
-                        <MdPlaylistAdd /> Save
+                        <MdPlaylistAdd />{' '}
+                        <span className="like-dislike-save-span-el">
+                          {' '}
+                          Save{' '}
+                        </span>
                       </SaveButton>
                     )}
                   </div>

@@ -1,6 +1,5 @@
 import {Link} from 'react-router-dom'
 import {BsDot} from 'react-icons/bs'
-import {formatDistanceToNow} from 'date-fns'
 
 import {
   VideoTitle,
@@ -26,10 +25,6 @@ const SavedVideosListItem = props => {
     title,
     viewsCount,
   } = videoDetails
-
-  const newDate = formatDistanceToNow(new Date(publishedAt))
-
-  const publishedDate = newDate.slice(-8)
 
   return (
     <NxtWatchContext.Consumer>
@@ -74,7 +69,7 @@ const SavedVideosListItem = props => {
                       <BsDot />
                     </XsTrendingVideoDot>
                     <PublishedDate isDarkMode={darkMode}>
-                      {publishedDate} ago
+                      {publishedAt} ago
                     </PublishedDate>
                   </div>
                 </div>
@@ -88,7 +83,7 @@ const SavedVideosListItem = props => {
                   <XsTrendingVideoDot isDarkMode={darkMode}>
                     <BsDot />
                   </XsTrendingVideoDot>
-                  <PublishedDate> {publishedDate} ago </PublishedDate>
+                  <PublishedDate> {publishedAt} ago </PublishedDate>
                 </div>
               </div>
             </Link>

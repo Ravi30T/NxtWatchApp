@@ -77,6 +77,10 @@
   margin-top: 10px;
 }
 
+.like-dislike-save-span-el {
+  margin-left: 5px;
+}
+
 @media (max-width: 767px) {
   .video-player-responsive-container {
     width: 95vw;

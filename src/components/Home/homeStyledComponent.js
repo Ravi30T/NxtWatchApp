@@ -3,11 +3,21 @@ import styled from 'styled-components'
 export const HomeContainer = styled.div`
   @media (max-width: 767px) {
     display: ${props => (props.smDevice ? 'none' : 'flex')};
+    background-color: ${props => (props.isDarkMode ? '#181818' : '#ffffff')};
     flex-direction: column;
+    margin-left: 0px;
+    width: 100%;
+    padding-top: 5px;
+    padding: 10px;
   }
-  padding: 10px;
-  background-color: ${props => (props.isDarkMode ? '#181818' : '#ffffff')};
-  width: 100%;
+
+  @media (min-width: 768px) {
+    padding: 10px;
+    padding-top: 55px;
+    background-color: ${props => (props.isDarkMode ? '#181818' : '#ffffff')};
+    width: 80%;
+    margin-left: 20%;
+  }
 `
 
 export const SearchBoxContainer = styled.div`
@@ -24,7 +34,7 @@ export const SearchBoxContainer = styled.div`
 
   @media (min-width: 768px) {
     width: 450px;
-    margin-top: 6px;
+    margin-top: 20px;
   }
 `
 
@@ -108,6 +118,10 @@ export const AdContainer = styled.div`
   height: 250px;
   width: 100%;
   margin-bottom: 10px;
+
+  @media (min-width: 768px) {
+    margin-top: 20px;
+  }
 
   @media (max-width: 767px) {
     height: 210px;

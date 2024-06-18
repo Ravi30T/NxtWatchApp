@@ -5,11 +5,18 @@ export const VideoItemDetailsContainer = styled.div`
     display: ${props => (props.smDevice ? 'none' : 'flex')};
     flex-direction: column;
     width: 100vw;
+    padding: 10px;
+    background-color: ${props => (props.isDarkMode ? '#181818' : '#ffffff')};
   }
-  padding: 10px;
-  background-color: ${props => (props.isDarkMode ? '#181818' : '#ffffff')};
-  width: 100%;
+
   height: 100vh;
+  @media (min-width: 768px) {
+    padding: 10px;
+    padding-top: 55px;
+    background-color: ${props => (props.isDarkMode ? '#181818' : '#ffffff')};
+    width: 80%;
+    margin-left: 20%;
+  }
 `
 
 export const VideoDetailsContainer = styled.div`
@@ -26,6 +33,10 @@ export const VideoPlayerContainer = styled.div`
   width: 100%;
   @media (max-width: 767px) {
     width: 90vw;
+  }
+
+  @media (min-width: 768px) {
+    margin-top: 20px;
   }
 `
 

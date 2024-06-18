@@ -7,7 +7,13 @@ export const SavedVideosContainer = styled.div`
     width: 100vw;
   }
   background-color: ${props => (props.isDarkMode ? '#0f0f0f' : '#ffffff')};
-  width: 100%;
+
+  @media (min-width: 768px) {
+    padding: 0px;
+    padding-top: 60px;
+    width: 80%;
+    margin-left: 20%;
+  }
 `
 
 export const SavedVideosBannerContainer = styled.div`

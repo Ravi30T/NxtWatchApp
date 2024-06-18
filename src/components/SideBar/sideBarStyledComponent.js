@@ -4,13 +4,20 @@ export const SideBarContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 18vw;
+  width: 20%;
   background-color: ${props => (props.isdarkMode ? '#212121' : '#ffffff')};
+  height: 95vh;
+  padding-bottom: 10px;
+  position: fixed;
+  left: 0;
+  margin-top: 55px;
 
   @media (max-width: 767px) {
     display: ${props => (props.smDevice ? 'flex' : 'none')};
-    height: 100vh;
+    height: 88vh;
+    padding-bottom: 10px;
     width: 100vw;
+    margin-top: 0px;
   }
 `
 

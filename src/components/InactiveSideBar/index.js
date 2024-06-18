@@ -11,7 +11,7 @@ import NxtWatchContext from '../../context/NxtWatchContext'
 import './index.css'
 
 import {
-  SideBarContainer,
+  InactiveSideBarContainer,
   ListItem,
   ItemsContainer,
   ListButton,
@@ -38,7 +38,7 @@ class SideBar extends Component {
           } = value
 
           return (
-            <SideBarContainer
+            <InactiveSideBarContainer
               smDevice={smSideBar}
               lgdevice={lgSideBar}
               isdarkMode={darkMode}
@@ -152,7 +152,7 @@ class SideBar extends Component {
                   Enjoy! Now to see your channels and recommendations!
                 </SideBarFooterText>
               </div>
-            </SideBarContainer>
+            </InactiveSideBarContainer>
           )
         }}
       </NxtWatchContext.Consumer>

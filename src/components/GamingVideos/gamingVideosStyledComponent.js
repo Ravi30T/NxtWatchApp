@@ -5,9 +5,16 @@ export const GamingContainer = styled.div`
     display: ${props => (props.smDevice ? 'none' : 'flex')};
     flex-direction: column;
     width: 100vw;
+    padding-top: 0px;
   }
   background-color: ${props => (props.isDarkMode ? '#0f0f0f' : '#ffffff')};
-  width: 100%;
+
+  @media (min-width: 768px) {
+    padding: 0px;
+    padding-top: 60px;
+    width: 80%;
+    margin-left: 20%;
+  }
 `
 
 export const GamingBannerContainer = styled.div`
